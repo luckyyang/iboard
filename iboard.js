@@ -5,6 +5,7 @@ Players = new Mongo.Collection("players");
 Records = new Mongo.Collection("records");
 
 if (Meteor.isClient) {
+  /*Players.insert({name: "liujiyang", score: "10"});*/
   console.log("user is login???? " + Meteor.userId());
 
   Template.leaderboard.helpers({
@@ -19,10 +20,7 @@ if (Meteor.isClient) {
 
   Template.leaderboard.events({
     'click .inc': function () {
-      Players.update(Session.get("selectedPlayer"), {$inc: {score: 5}});
-      Records.insert({playerId: Session.get("selectedPlayer"),
-      voterId:Meteor.userId(),
-      voterName: Meteor.user().emails[0].address});
+      Meteor.call("addScore", Session.get("selectedPlayer"));
     }
   });
 
@@ -55,3 +53,9 @@ if (Meteor.isServer) {
     }
   });
 }
+
+Meteor.methods({
+  addScore: function(playId) {
+    Players.update(playId, {$inc: {score: 5}});
+  }
+});
