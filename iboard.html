@@ -10,11 +10,13 @@
     <h1 class="title">Leaderboard</h1>
     <div class="subtitle">Select a scientist to give them points</div>
     {{> loginButtons}}
-    {{#if currentUser}}
-      {{> leaderboard}}
-    {{/if}}
   </div>
 </body>
+
+<template name="homepage">
+  <h1>this is home page</h1>
+  <a href="/vote">go to vote!</a>
+</template>
 
 <template name="leaderboard">
   <ol class="leaderboard">
