@@ -5,6 +5,8 @@ Players = new Mongo.Collection("players");
 Records = new Mongo.Collection("records");
 
 if (Meteor.isClient) {
+  Meteor.subscribe("players");
+  Meteor.subscribe("records");
   /*Players.insert({name: "liujiyang", score: "10"});*/
   console.log("user is login???? " + Meteor.userId());
 
@@ -51,6 +53,13 @@ if (Meteor.isServer) {
         });
       });
     }
+  });
+
+  Meteor.publish("players", function () {
+    return Players.find();
+  });
+  Meteor.publish("records", function () {
+    return Records.find({voterId: this.userId});
   });
 }
 
