@@ -1,10 +1,11 @@
 //meteor add iron:router
 Router.configure({
-  layoutTemplate:"layoutTemplate",
+  layoutTemplate:"layoutTemplate"
 });
 
 Router.route('/', function () {
   this.render('homepage');
+  this.layout('');
 });
 /*Router.route('/vote', function () {
   this.render('leaderboard');
