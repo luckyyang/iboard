@@ -57,5 +57,8 @@ if (Meteor.isServer) {
 Meteor.methods({
   addScore: function(playId) {
     Players.update(playId, {$inc: {score: 5}});
+    Records.insert({playerId: playId,
+      voterId:Meteor.userId(),
+      voterEmail: Meteor.user().emails[0].address});
   }
 });
